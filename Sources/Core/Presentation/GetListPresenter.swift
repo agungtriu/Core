@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 public class GetListPresenter<Request, Response, Interactor: UseCase>: ObservableObject where Interactor.Request == Request, Interactor.Response == [Response] {
-    private var cancellables: Set<AnyPublisher> = []
+    private var cancellables: Set<AnyCancellable> = []
     private let _useCase: Interactor
     @Published public var result: [Response] = []
     @Published public var errorMessage: String = ""
@@ -28,7 +28,7 @@ public class GetListPresenter<Request, Response, Interactor: UseCase>: Observabl
                     self.errorMessage = error.localizedDescription
                     self.isError = true
                     self.isLoading = false
-                case.finished(let value):
+                case.finished:
                     self.isLoading = false
                 }
             }, receiveValue: { result in
