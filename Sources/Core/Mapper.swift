@@ -7,13 +7,12 @@
 
 import Foundation
 public protocol Mapper {
-    associatedtype Responses
-    associatedtype Entities
-    associatedtype Domains
+    associatedtype Request
+    associatedtype Response
     associatedtype Entity
     associatedtype Domain
     
-    func transformResponsesToDomains(responses: Responses) -> Domains
-    func transformEntitiesToDomains(entities: Entities) -> Domains
+    func transformResponseToDomain(response: Response) -> Domain
+    func transformEntityToDomain(entity: Entity) -> Domain
     func transformDomainToEntity(domain: Domain) -> Entity
 }
